@@ -23,6 +23,7 @@ pom.xml.versionsBackup
 
 # Npm
 node_modules/
+dist/
 
 # IntelliJ project files
 *.iml
