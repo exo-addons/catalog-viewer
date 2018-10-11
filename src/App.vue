@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 class="title">  The list of Addons :</h1>
+    <h1 class="title">  Addons catalog </h1>
     <table>
       <thead>
         <tr>
@@ -17,26 +17,26 @@
             Compatibility
           </th>
           <th>
-            DownloadUrl
+            Download
           </th>
         </tr> 
       </thead>
       <tbody>
-        <tr v-for="list in lists" :key="list.name">
+        <tr v-for="addon in addons" :key="addon.name">
           <td>
-            {{list.name}}
+            {{addon.name}}
           </td> 
           <td>
-            {{list.version}}
+            {{addon.version}}
           </td> 
           <td>
-            {{list.unstable}}
+            {{addon.unstable}}
           </td>
           <td>
-            {{list.compatibility}}
+            {{addon.compatibility}}
           </td>
           <td> 
-            <a :href="list.downloadUrl">path: {{list.downloadUrl}}</a>
+            <a :href="addon.downloadUrl" ><i class="uiIconDownload"></i></a>
           </td>
         </tr>
       </tbody>
@@ -48,7 +48,7 @@
 
 export default {
   name: 'App',
-  props: ['lists']
+  props: ['addons']
 }
 </script>
 
@@ -76,11 +76,6 @@ table {
 th {
   background-color: #578dc9;
   color: #f9f9f9;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 td {
@@ -92,39 +87,36 @@ th, td {
   padding: 10px 20px;
 }
 
-th.active {
-  color: #fff;
-}
-
-th.active .arrow {
-  opacity: 1;
-}
-
-.arrow {
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  opacity: 0.66;
-}
-
-.arrow.asc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #fff;
-}
-
-.arrow.dsc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #fff;
-}
 .title{
   font-size: 34px;
   font-weight: bold;
   color: #578dc9;
   line-height: 30px;
   word-wrap: normal;
+}
+@font-face {
+  font-family: 'PLF-FONT-ICONS';
+  src: url('fonts/PLF-FONT-ICONS.eot?-m9uidt');
+  src: url('fonts/PLF-FONT-ICONS.eot?#iefix-m9uidt') format('embedded-opentype'), url('fonts/PLF-FONT-ICONS.ttf?-m9uidt') format('truetype'), url('fonts/PLF-FONT-ICONS.woff?-m9uidt') format('woff'), url('fonts/PLF-FONT-ICONS.svg?-m9uidt#PLF-FONT-ICONS') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="uiIcon"]  {
+    font-family: "PLF-FONT-ICONS";
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    text-transform: none;
+    color: #578dc9;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    position: relative;
+    top: 1px;
+}
+.uiIconDownload:before {
+    content: "\e784";
 }
 </style>

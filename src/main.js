@@ -13,17 +13,17 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App :lists="posts"/>',
+  template: '<App :addons="addons"/>',
   created() {
     this.fetchData();	
   },
   data: {
-    posts: []
+    addons: []
   },
   methods: {
     fetchData() {
     axios.get('http://storage.exoplatform.org/public/Addons/list.json', {crossdomain: true}).then(response => {
-        this.posts = response.data;
+        this.addons = response.data;
         });
     }
   }
