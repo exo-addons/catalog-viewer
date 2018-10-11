@@ -1,6 +1,11 @@
 <template>
   <div id="app">
     <h1 class="title">  Addons catalog </h1>
+    <div class="alert-error" v-if="errormsg != null">
+      <i class="uiIconError"></i>
+      Failed to load response
+    </div>
+    <img src="./assets/loading.gif" v-if="addons.length == 0 && errormsg == null">
     <table v-if="addons.length > 0">
       <thead>
         <tr>
@@ -53,13 +58,19 @@ export default {
   },
   data() {
     return {
-      addons: []
+      addons: [],
+      errormsg: null
     }
   },
   methods: {
     fetchData() {
       axios.get('http://storage.exoplatform.org/public/Addons/list.json').then(response => {
         this.addons = response.data;
+        if(response.status != 200){
+          errormsg = "Failed to load response";
+        }
+      }).catch(error => {
+          this.errormsg = "Failed to load response";
       });
     }
   }
@@ -73,7 +84,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 body {
   font-family: Helvetica Neue, Arial, sans-serif;
@@ -85,6 +96,7 @@ table {
   border: 2px solid #578dc9;
   border-radius: 3px;
   background-color: #fff;
+  margin: auto;
 }
 
 th {
@@ -132,5 +144,17 @@ th, td {
 }
 .uiIconDownload:before {
     content: "\e784";
+}
+.alert-error {
+    background: #ed9c95;
+    border-color: #c72222;
+    color: #333333;
+    padding: 18px;
+    margin: 100px auto;
+    width: 350px;
+}
+.alert-error .uiIconError:before {
+    content: "\e76d";
+    color: #c72222;
 }
 </style>
