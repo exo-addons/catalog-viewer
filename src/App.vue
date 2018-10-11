@@ -3,7 +3,7 @@
     <h1 class="title">  Addons catalog </h1>
     <div class="alert-error" v-if="errormsg != null">
       <i class="uiIconError"></i>
-      Failed to load response
+      {{errormsg}}
     </div>
     <img src="./assets/loading.gif" v-if="addons.length == 0 && errormsg == null">
     <table v-if="addons.length > 0">
@@ -67,10 +67,10 @@ export default {
       axios.get('http://storage.exoplatform.org/public/Addons/list.json').then(response => {
         this.addons = response.data;
         if(response.status != 200){
-          this.errormsg = "Failed to load response";
+          this.errormsg = "Failed to load the catalog";
         }
       }).catch(error => {
-          this.errormsg = "Failed to load response";
+          this.errormsg = "Failed to load the catalog";
       });
     }
   }
