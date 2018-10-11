@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1 class="title">  Addons catalog </h1>
-    <table>
+    <table v-if="addons.length > 0">
       <thead>
         <tr>
           <th>
@@ -22,7 +22,7 @@
         </tr> 
       </thead>
       <tbody>
-        <tr v-for="addon in addons" :key="addon.name">
+        <tr v-for="addon in addons">
           <td>
             {{addon.name}}
           </td> 
@@ -45,10 +45,24 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
   name: 'App',
-  props: ['addons']
+   created() {
+    this.fetchData();	
+  },
+  data() {
+    return {
+      addons: []
+    }
+  },
+  methods: {
+    fetchData() {
+      axios.get('http://storage.exoplatform.org/public/Addons/list.json').then(response => {
+        this.addons = response.data;
+      });
+    }
+  }
 }
 </script>
 

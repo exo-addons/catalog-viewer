@@ -12,19 +12,5 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  components: { App },
-  template: '<App :addons="addons"/>',
-  created() {
-    this.fetchData();	
-  },
-  data: {
-    addons: []
-  },
-  methods: {
-    fetchData() {
-    axios.get('http://storage.exoplatform.org/public/Addons/list.json', {crossdomain: true}).then(response => {
-        this.addons = response.data;
-        });
-    }
-  }
+  render: h => h(App)
 })
