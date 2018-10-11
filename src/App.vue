@@ -67,7 +67,7 @@ export default {
       axios.get('http://storage.exoplatform.org/public/Addons/list.json').then(response => {
         this.addons = response.data;
         if(response.status != 200){
-          errormsg = "Failed to load response";
+          this.errormsg = "Failed to load response";
         }
       }).catch(error => {
           this.errormsg = "Failed to load response";
