@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     fetchData() {
-      axios.get('http://storage.exoplatform.org/public/Addons/list.json').then(response => {
+      axios.get('http://addons.exoplatform.org/list.json').then(response => {
         this.addons = response.data;
         if(response.status != 200){
           this.errormsg = "Failed to load the catalog";
